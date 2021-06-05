@@ -1,13 +1,14 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Layouts } from "./layouts";
 import Categories from "./pages/categories";
-import Home from "./pages/home";
+import Dashboard from "./pages/dashboard";
 import Users from "./pages/users";
 
 function App() {
   return (
     <Router>
-      <div>
+      <Layouts>
         <Switch>
           <Route path="/categories">
             <Categories />
@@ -16,10 +17,10 @@ function App() {
             <Users />
           </Route>
           <Route path="/">
-            <Home />
+            <Dashboard />
           </Route>
         </Switch>
-      </div>
+      </Layouts>
     </Router>
   );
 }
