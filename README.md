@@ -1,6 +1,4 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![CI/CD](https://github.com/mothan-team/MoreThanBlog_Admin/actions/workflows/config.yml/badge.svg)](https://github.com/mothan-team/MoreThanBlog_Admin/actions/workflows/config.yml)
 
 # Getting Started with Antd Design
 
