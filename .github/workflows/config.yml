@@ -37,5 +37,5 @@ jobs:
           key: ${{ secrets.KEY }}
           script: |
             cd morethan
-            docker-compose down
-            docker-compose up --detach --build
+            docker-compose rm --stop more-than-blogs-admin
+            docker-compose up --detach --build more-than-blogs-admin
