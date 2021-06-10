@@ -14,6 +14,7 @@ const MenuItems = [
   { path: "/admin/users", title: "Users", icon: <UserOutlined /> },
   { path: "/admin/categories", title: "Categories", icon: <UnorderedListOutlined /> },
   { path: "/admin/blogs", title: "Blogs", icon: <ContainerOutlined /> },
+  {path: "/admin/editor", title: "Editor", icon: <UnorderedListOutlined/> }
 ];
 
 const getSelected = (path) => MenuItems.map((x) => x.path).find((x) => path.includes(x));
