@@ -5,8 +5,9 @@ import createSagaMiddleware from "redux-saga";
 import rootSaga from "./rootSaga";
 
 const sagaMiddleware = createSagaMiddleware();
+const composedEnhancers = composeWithDevTools(applyMiddleware(sagaMiddleware));
 
-const store = createStore(rootReducer, applyMiddleware(sagaMiddleware), composeWithDevTools());
+const store = createStore(rootReducer, composedEnhancers);
 
 sagaMiddleware.run(rootSaga);
 
