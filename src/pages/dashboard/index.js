@@ -1,6 +1,8 @@
 import React from "react";
 import { Statistic, Card, Row, Col } from "antd";
 import { ArrowUpOutlined, ArrowDownOutlined, UserOutlined } from "@ant-design/icons";
+import Chart from "../../components/Chart";
+import "./index.less";
 
 const Dashboard = () => {
   return (
@@ -34,6 +36,11 @@ const Dashboard = () => {
               suffix="%"
             />
           </Card>
+        </Col>
+      </Row>
+      <Row className="chart">
+        <Col span={24}>
+          <Chart />
         </Col>
       </Row>
     </div>
