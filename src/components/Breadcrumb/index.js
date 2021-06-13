@@ -1,21 +1,20 @@
 import React from "react";
 import { Breadcrumb as AntdBreadcrumb } from "antd";
-import "./index.less";
 import { Link } from "react-router-dom";
+import withBreadcrumbs from "react-router-breadcrumbs-hoc";
+import "./index.less";
 
-// TODO: should render the breadcrumb based on the url instead of hard-coded
-
-const Breadcrumb = () => {
+const Breadcrumb = ({ breadcrumbs }) => {
+  console.log(breadcrumbs);
   return (
     <AntdBreadcrumb style={{ margin: "16px 0" }}>
-      <AntdBreadcrumb.Item>
-        <Link to="/">Home</Link>
-      </AntdBreadcrumb.Item>
-      <AntdBreadcrumb.Item>
-        <Link to="/">Dashboard</Link>
-      </AntdBreadcrumb.Item>
+      {breadcrumbs.map(({ breadcrumb }) => (
+        <AntdBreadcrumb.Item key={breadcrumb.key}>
+          <Link to={breadcrumb.key}>{breadcrumb}</Link>
+        </AntdBreadcrumb.Item>
+      ))}
     </AntdBreadcrumb>
   );
 };
 
-export default Breadcrumb;
+export default withBreadcrumbs()(Breadcrumb);
