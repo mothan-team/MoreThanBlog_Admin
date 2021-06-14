@@ -1,6 +1,4 @@
-import React from "react";
-import { lazy } from "react";
-import { Suspense } from "react";
+import React, { lazy, Suspense } from "react";
 import { Switch, Route, Redirect, useRouteMatch } from "react-router-dom";
 import PrimaryLayout from "../layouts/PrimaryLayout";
 
@@ -10,6 +8,7 @@ const Users = lazy(() => import("../pages/users"));
 
 const PrimaryRoutes = () => {
   let match = useRouteMatch();
+
   return (
     <PrimaryLayout>
       <Suspense fallback={<div className="loading" />}>
