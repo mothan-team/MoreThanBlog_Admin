@@ -28,12 +28,12 @@ const Login = (props) => {
           <FormItem name="password" rules={[{ required: true }]} hasFeedback className="mt-3">
             <Input type="password" placeholder="Password" />
           </FormItem>
-          <Row className="mt-4">
+          <Row>
             <Button type="primary" htmlType="submit" loading={loading}>
               Sign in
             </Button>
             <p>
-              <span className="mr-4">Username ：guest</span>
+              <span className="margin-right">Username ：guest</span>
               <span>Password ：guest</span>
             </p>
           </Row>
