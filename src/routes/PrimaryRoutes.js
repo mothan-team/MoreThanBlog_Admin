@@ -8,6 +8,7 @@ const Users = lazy(() => import("../pages/users"));
 
 const PrimaryRoutes = () => {
   let match = useRouteMatch();
+
   return (
     <PrimaryLayout>
       <Suspense fallback={<div className="loading" />}>
