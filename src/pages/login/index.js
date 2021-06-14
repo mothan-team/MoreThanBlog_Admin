@@ -12,14 +12,12 @@ const Login = (props) => {
     dispatch({ type: "login/login", payload: values });
   };
 
-  console.log("object");
-
   return (
     <Fragment>
       <div className="form">
         <div className="logo">
-          <img alt="logo" src="/" />
-          <span>FOO</span>
+          <img alt="logo" src="https://morethanblog.tk/asset/logo.png" />
+          <span>Mỏ than</span>
         </div>
         <Form onFinish={handleOk}>
           <FormItem name="username" rules={[{ required: true }]} hasFeedback>
@@ -29,11 +27,11 @@ const Login = (props) => {
             <Input type="password" placeholder="Password" />
           </FormItem>
           <Row>
-            <Button type="primary" htmlType="submit" loading={loading.effects.login}>
+            <Button type="primary" htmlType="submit" loading={loading}>
               Sign in
             </Button>
             <p>
-              <span className="margin-right">Username ：guest</span>
+              <span className="mr-4">Username ：guest</span>
               <span>Password ：guest</span>
             </p>
           </Row>
