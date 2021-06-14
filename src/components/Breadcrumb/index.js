@@ -5,7 +5,6 @@ import withBreadcrumbs from "react-router-breadcrumbs-hoc";
 import "./index.less";
 
 const Breadcrumb = ({ breadcrumbs }) => {
-  console.log(breadcrumbs);
   return (
     <AntdBreadcrumb style={{ margin: "16px 0" }}>
       {breadcrumbs.map(({ breadcrumb }) => (

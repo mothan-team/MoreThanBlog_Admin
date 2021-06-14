@@ -8,13 +8,13 @@ const SideMenu = () => {
   return (
     <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
       <Menu.Item key="1" icon={<PieChartOutlined />}>
-        <Link to="/dashboard">Dashboard</Link>
+        <Link to="/admin/dashboard">Dashboard</Link>
       </Menu.Item>
       <Menu.Item key="2" icon={<UserOutlined />}>
-        <Link to="/users">Users</Link>
+        <Link to="/admin/users">Users</Link>
       </Menu.Item>
       <Menu.Item key="3" icon={<UnorderedListOutlined />}>
-        <Link to="/categories">Categories</Link>
+        <Link to="/admin/categories">Categories</Link>
       </Menu.Item>
     </Menu>
   );

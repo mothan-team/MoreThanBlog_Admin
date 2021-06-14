@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Layout } from "antd";
-import Breadcrumb from "../components/Breadcrumb";
-import SideMenu from "../components/SideMenu";
-import "./index.less";
+import Breadcrumb from "../../components/Breadcrumb";
+import SideMenu from "../../components/SideMenu";
 import { Link } from "react-router-dom";
+import "./index.less";
 
 const { Header, Content, Footer, Sider } = Layout;
 
-export const Layouts = (props) => {
+const PrimaryLayout = (props) => {
   const [collapsed, setCollapsed] = useState(false);
   return (
     <Layout style={{ minHeight: "100vh" }}>
@@ -30,3 +30,5 @@ export const Layouts = (props) => {
     </Layout>
   );
 };
+
+export default PrimaryLayout;
