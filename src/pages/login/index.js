@@ -6,6 +6,8 @@ import "./index.less";
 const FormItem = Form.Item;
 
 const Login = (props) => {
+  const [form] = Form.useForm();
+
   const { dispatch, loading } = props;
 
   const handleOk = (values) => {
@@ -19,14 +21,14 @@ const Login = (props) => {
           <img alt="logo" src="https://morethanblog.tk/asset/logo.png" />
           <span>Mỏ than</span>
         </div>
-        <Form onFinish={handleOk}>
+        <Form onFinish={handleOk} form={form}>
           <FormItem name="username" rules={[{ required: true }]} hasFeedback>
             <Input placeholder="Username" />
           </FormItem>
-          <FormItem name="password" rules={[{ required: true }]} hasFeedback>
+          <FormItem name="password" rules={[{ required: true }]} hasFeedback className="mt-3">
             <Input type="password" placeholder="Password" />
           </FormItem>
-          <Row>
+          <Row className="mt-4">
             <Button type="primary" htmlType="submit" loading={loading}>
               Sign in
             </Button>
