@@ -1,5 +1,7 @@
 import React, { Fragment } from "react";
 import { Button, Row, Input, Form } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { LOGIN } from "../../redux/Auth/auth.types";
 
 import "./index.less";
 
@@ -7,12 +9,14 @@ const FormItem = Form.Item;
 
 const Login = (props) => {
   const [form] = Form.useForm();
-
-  const { dispatch, loading } = props;
+  const loading = useSelector((state) => state.auth.loading);
+  const dispatch = useDispatch();
 
   const handleOk = (values) => {
-    dispatch({ type: "login/login", payload: values });
+    dispatch({ type: LOGIN, payload: values });
   };
+
+  const errors = ["Asdf"];
 
   return (
     <Fragment>
@@ -22,19 +26,20 @@ const Login = (props) => {
           <span>Mỏ than</span>
         </div>
         <Form onFinish={handleOk} form={form}>
-          <FormItem name="username" rules={[{ required: true }]} hasFeedback>
-            <Input placeholder="Username" />
+          <FormItem name="email" rules={[{ required: true }]} hasFeedback>
+            <Input placeholder="Email" />
           </FormItem>
           <FormItem name="password" rules={[{ required: true }]} hasFeedback className="mt-3">
             <Input type="password" placeholder="Password" />
           </FormItem>
+          <Form.ErrorList errors={errors} />
           <Row>
             <Button type="primary" htmlType="submit" loading={loading}>
               Sign in
             </Button>
             <p>
-              <span className="margin-right">Username ：guest</span>
-              <span>Password ：guest</span>
+              <span style={{ marginRight: 20 }}>Username morethan.team@yopmail.com</span>
+              <span>Password : abcd@1234</span>
             </p>
           </Row>
         </Form>
