@@ -1,22 +1,37 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { Button, Row, Input, Form } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { LOGIN } from "../../redux/Auth/auth.types";
 
 import "./index.less";
+import { useHistory } from "react-router-dom";
 
 const FormItem = Form.Item;
 
 const Login = (props) => {
   const [form] = Form.useForm();
   const loading = useSelector((state) => state.auth.loading);
+  const error = useSelector((state) => state.auth.error);
   const dispatch = useDispatch();
+  let history = useHistory();
 
   const handleOk = (values) => {
-    dispatch({ type: LOGIN, payload: values });
+    dispatch({ type: LOGIN, payload: { request: values, history } });
   };
 
-  const errors = ["Asdf"];
+  useEffect(() => {
+    switch (error) {
+      case "User Not Found":
+        form.setFields([{ name: "email", errors: ["User Not Found"] }]);
+        break;
+      case "Wrong Password":
+        form.setFields([{ name: "password", errors: ["Wrong Password"] }]);
+        break;
+
+      default:
+        break;
+    }
+  }, [error, form]);
 
   return (
     <Fragment>
@@ -32,7 +47,6 @@ const Login = (props) => {
           <FormItem name="password" rules={[{ required: true }]} hasFeedback className="mt-3">
             <Input type="password" placeholder="Password" />
           </FormItem>
-          <Form.ErrorList errors={errors} />
           <Row>
             <Button type="primary" htmlType="submit" loading={loading}>
               Sign in

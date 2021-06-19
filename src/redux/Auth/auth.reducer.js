@@ -4,6 +4,7 @@ const INITIAL_STATE = {
   userId: null,
   token: null,
   loading: false,
+  error: null,
 };
 
 const authReducer = (state = INITIAL_STATE, { type, payload }) => {
@@ -26,6 +27,7 @@ const authReducer = (state = INITIAL_STATE, { type, payload }) => {
       return {
         ...state,
         loading: false,
+        error: payload.message,
       };
 
     default:
