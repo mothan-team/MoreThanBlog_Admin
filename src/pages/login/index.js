@@ -1,18 +1,37 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { Button, Row, Input, Form } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { LOGIN } from "../../redux/Auth/auth.types";
 
 import "./index.less";
+import { useHistory } from "react-router-dom";
 
 const FormItem = Form.Item;
 
 const Login = (props) => {
   const [form] = Form.useForm();
-
-  const { dispatch, loading } = props;
+  const loading = useSelector((state) => state.auth.loading);
+  const error = useSelector((state) => state.auth.error);
+  const dispatch = useDispatch();
+  let history = useHistory();
 
   const handleOk = (values) => {
-    dispatch({ type: "login/login", payload: values });
+    dispatch({ type: LOGIN, payload: { request: values, history } });
   };
+
+  useEffect(() => {
+    switch (error) {
+      case "User Not Found":
+        form.setFields([{ name: "email", errors: ["User Not Found"] }]);
+        break;
+      case "Wrong Password":
+        form.setFields([{ name: "password", errors: ["Wrong Password"] }]);
+        break;
+
+      default:
+        break;
+    }
+  }, [error, form]);
 
   return (
     <Fragment>
@@ -22,8 +41,8 @@ const Login = (props) => {
           <span>Mỏ than</span>
         </div>
         <Form onFinish={handleOk} form={form}>
-          <FormItem name="username" rules={[{ required: true }]} hasFeedback>
-            <Input placeholder="Username" />
+          <FormItem name="email" rules={[{ required: true }]} hasFeedback>
+            <Input placeholder="Email" />
           </FormItem>
           <FormItem name="password" rules={[{ required: true }]} hasFeedback className="mt-3">
             <Input type="password" placeholder="Password" />
@@ -33,8 +52,8 @@ const Login = (props) => {
               Sign in
             </Button>
             <p>
-              <span className="margin-right">Username ：guest</span>
-              <span>Password ：guest</span>
+              <span style={{ marginRight: 20 }}>Username morethan.team@yopmail.com</span>
+              <span>Password : abcd@1234</span>
             </p>
           </Row>
         </Form>
