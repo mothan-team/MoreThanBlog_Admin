@@ -19,6 +19,7 @@ function* getBlogsAsync({ payload }) {
     yield put({ type: GET_BLOGS_FAIL, payload: error });
   }
 }
+
 function* deleteBlogAsync({ payload: id }) {
   try {
     const url = `/blogs/${id}`;

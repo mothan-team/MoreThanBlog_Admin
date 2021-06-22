@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
-import { Table, Space, Spin, Button, Modal } from "antd";
+import { Table, Space, Spin, Button, Modal, Tag } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { DELETE_BLOG, GET_BLOGS } from "../../redux/Blog/blog.types";
 import { useHistory } from "react-router-dom";
 import { parse } from "query-string";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import "./index.less";
+import { cutTail } from "../../utils/stringHelper";
 
 const Blogs = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ const Blogs = () => {
   const onChange = (p, s) => {
     history.replace(`/admin/blogs?page=${p}&size=${s}`);
     dispatch({ type: GET_BLOGS, payload: { page: p, size: s } });
+    window.scroll({ top: 0, left: 0, behavior: "smooth" });
   };
 
   const columns = [
@@ -31,10 +33,12 @@ const Blogs = () => {
     {
       title: "Description",
       dataIndex: "desc",
+      render: (text) => cutTail(text, 75),
     },
     {
       title: "Content",
       dataIndex: "content",
+      render: (text) => cutTail(text, 200),
     },
     {
       title: "Read",
@@ -49,7 +53,7 @@ const Blogs = () => {
           <div>
             {categories.map((x) => (
               <a key={x.id} href={`/admin/categories/${x.id}`}>
-                {x.name}
+                <Tag color="#2db7f5">{x.name}</Tag>
               </a>
             ))}
           </div>
