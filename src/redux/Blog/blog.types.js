@@ -1,3 +1,7 @@
 export const GET_BLOGS = "GET_BLOGS";
 export const GET_BLOGS_SUCCESS = "GET_BLOGS_SUCCESS";
 export const GET_BLOGS_FAIL = "GET_BLOGS_FAIL";
+
+export const DELETE_BLOG = "DELETE_BLOG";
+export const DELETE_BLOG_SUCCESS = "DELETE_BLOG_SUCCESS";
+export const DELETE_BLOG_FAIL = "DELETE_BLOG_FAIL";

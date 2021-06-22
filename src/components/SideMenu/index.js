@@ -1,5 +1,6 @@
 import React from "react";
 import { Menu } from "antd";
+import { Link, useLocation } from "react-router-dom";
 import {
   UserOutlined,
   PieChartOutlined,
@@ -7,23 +8,25 @@ import {
   ContainerOutlined,
 } from "@ant-design/icons";
 import "./index.less";
-import { Link } from "react-router-dom";
+
+const MenuItems = [
+  { path: "/admin/dashboard", title: "Dashboard", icon: <PieChartOutlined /> },
+  { path: "/admin/users", title: "Users", icon: <UserOutlined /> },
+  { path: "/admin/categories", title: "Categories", icon: <UnorderedListOutlined /> },
+  { path: "/admin/blogs", title: "Blogs", icon: <ContainerOutlined /> },
+];
 
 const SideMenu = () => {
+  const location = useLocation();
+  const selectedItem =
+    MenuItems.map((x) => x.path).find((x) => location.pathname.includes(x)) || "/admin";
   return (
-    <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
-      <Menu.Item key="1" icon={<PieChartOutlined />}>
-        <Link to="/admin/dashboard">Dashboard</Link>
-      </Menu.Item>
-      <Menu.Item key="2" icon={<UserOutlined />}>
-        <Link to="/admin/users">Users</Link>
-      </Menu.Item>
-      <Menu.Item key="3" icon={<UnorderedListOutlined />}>
-        <Link to="/admin/categories">Categories</Link>
-      </Menu.Item>
-      <Menu.Item key="4" icon={<ContainerOutlined />}>
-        <Link to="/admin/blogs">Blogs</Link>
-      </Menu.Item>
+    <Menu theme="dark" defaultSelectedKeys={[selectedItem]} mode="inline">
+      {MenuItems.map((item) => (
+        <Menu.Item key={item.path} icon={item.icon}>
+          <Link to={item.path}>{item.title}</Link>
+        </Menu.Item>
+      ))}
     </Menu>
   );
 };

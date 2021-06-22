@@ -1,4 +1,11 @@
-import { GET_BLOGS, GET_BLOGS_FAIL, GET_BLOGS_SUCCESS } from "./blog.types";
+import {
+  DELETE_BLOG,
+  DELETE_BLOG_FAIL,
+  DELETE_BLOG_SUCCESS,
+  GET_BLOGS,
+  GET_BLOGS_FAIL,
+  GET_BLOGS_SUCCESS,
+} from "./blog.types";
 
 const INITIAL_STATE = {
   blogs: [],
@@ -15,6 +22,8 @@ const blogReducer = (state = INITIAL_STATE, { type, payload }) => {
       return {
         ...state,
         loading: true,
+        page: payload.page,
+        size: payload.size,
       };
 
     case GET_BLOGS_SUCCESS:
@@ -32,6 +41,25 @@ const blogReducer = (state = INITIAL_STATE, { type, payload }) => {
         error: payload.message,
       };
 
+    case DELETE_BLOG:
+      return {
+        ...state,
+        blogs: state.blogs.filter((x) => x.id !== payload),
+        loading: true,
+      };
+
+    case DELETE_BLOG_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+      };
+
+    case DELETE_BLOG_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: payload.message,
+      };
     default:
       return state;
   }
