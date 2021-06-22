@@ -13,7 +13,7 @@ const Login = (props) => {
   const loading = useSelector((state) => state.auth.loading);
   const error = useSelector((state) => state.auth.error);
   const dispatch = useDispatch();
-  let history = useHistory();
+  const history = useHistory();
 
   const handleOk = (values) => {
     dispatch({ type: LOGIN, payload: { request: values, history } });

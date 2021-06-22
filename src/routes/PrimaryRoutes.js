@@ -5,6 +5,7 @@ import PrimaryLayout from "../layouts/PrimaryLayout";
 const Dashboard = lazy(() => import("../pages/dashboard"));
 const Categories = lazy(() => import("../pages/categories"));
 const Users = lazy(() => import("../pages/users"));
+const Blogs = lazy(() => import("../pages/blogs"));
 
 const PrimaryRoutes = () => {
   let match = useRouteMatch();
@@ -16,6 +17,7 @@ const PrimaryRoutes = () => {
           <Redirect exact from={`${match.url}/`} to={`${match.url}/dashboard`} />
           <Route path={`${match.url}/dashboard`} component={Dashboard} />
           <Route path={`${match.url}/categories`} component={Categories} />
+          <Route path={`${match.url}/blogs`} component={Blogs} />
           <Route path={`${match.url}/users`} component={Users} />
           <Redirect to="/error" />
         </Switch>

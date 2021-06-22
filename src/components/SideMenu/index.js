@@ -1,6 +1,11 @@
 import React from "react";
 import { Menu } from "antd";
-import { UserOutlined, PieChartOutlined, UnorderedListOutlined } from "@ant-design/icons";
+import {
+  UserOutlined,
+  PieChartOutlined,
+  UnorderedListOutlined,
+  ContainerOutlined,
+} from "@ant-design/icons";
 import "./index.less";
 import { Link } from "react-router-dom";
 
@@ -15,6 +20,9 @@ const SideMenu = () => {
       </Menu.Item>
       <Menu.Item key="3" icon={<UnorderedListOutlined />}>
         <Link to="/admin/categories">Categories</Link>
+      </Menu.Item>
+      <Menu.Item key="4" icon={<ContainerOutlined />}>
+        <Link to="/admin/blogs">Blogs</Link>
       </Menu.Item>
     </Menu>
   );
