@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Menu } from "antd";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import {
   UserOutlined,
   PieChartOutlined,
@@ -16,12 +16,19 @@ const MenuItems = [
   { path: "/admin/blogs", title: "Blogs", icon: <ContainerOutlined /> },
 ];
 
+const getSelected = (path) => MenuItems.map((x) => x.path).find((x) => path.includes(x));
+
 const SideMenu = () => {
-  const location = useLocation();
-  const selectedItem =
-    MenuItems.map((x) => x.path).find((x) => location.pathname.includes(x)) || "/admin";
+  const history = useHistory();
+  const [selected, setSelected] = useState(getSelected(history.location.pathname));
+  useEffect(() => {
+    return history.listen((location) => {
+      setSelected(getSelected(location.pathname));
+    });
+  }, [history]);
+
   return (
-    <Menu theme="dark" defaultSelectedKeys={[selectedItem]} mode="inline">
+    <Menu theme="dark" selectedKeys={[selected]} mode="inline">
       {MenuItems.map((item) => (
         <Menu.Item key={item.path} icon={item.icon}>
           <Link to={item.path}>{item.title}</Link>
