@@ -1,10 +1,10 @@
 import React, { Fragment, useEffect } from "react";
 import { Button, Row, Input, Form } from "antd";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { LOGIN } from "../../redux/Auth/auth.types";
 
 import "./index.less";
-import { useHistory } from "react-router-dom";
 
 const FormItem = Form.Item;
 

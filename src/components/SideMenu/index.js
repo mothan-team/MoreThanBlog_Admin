@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Menu } from "antd";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import {
   UserOutlined,
   PieChartOutlined,
