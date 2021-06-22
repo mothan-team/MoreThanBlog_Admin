@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Table, Space, Spin, Button, Modal, Tag } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { DELETE_BLOG, GET_BLOGS } from "../../redux/Blog/blog.types";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { parse } from "query-string";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import "./index.less";
@@ -28,7 +28,7 @@ const Blogs = () => {
     {
       title: "Title",
       dataIndex: "title",
-      render: (text, record) => <a href={`/admin/blogs/${record.id}`}>{text}</a>,
+      render: (text, record) => <Link to={`/admin/blogs/${record.id}`}>{text}</Link>,
     },
     {
       title: "Description",
@@ -52,9 +52,9 @@ const Blogs = () => {
         return (
           <div>
             {categories.map((x) => (
-              <a key={x.id} href={`/admin/categories/${x.id}`}>
+              <Link key={x.id} to={`/admin/categories/${x.id}`}>
                 <Tag color="#2db7f5">{x.name}</Tag>
-              </a>
+              </Link>
             ))}
           </div>
         );
@@ -65,7 +65,7 @@ const Blogs = () => {
       key: "action",
       render: (text, record) => (
         <Space size="small">
-          <a href={`/admin/blogs/${record.id}`}>Edit</a>
+          <Link to={`/admin/blogs/${record.id}`}>Edit</Link>
           <Button type="link" danger size="small" onClick={() => showDeleteConfirm(record.id)}>
             Delete
           </Button>
