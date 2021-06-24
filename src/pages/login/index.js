@@ -3,6 +3,8 @@ import { Button, Row, Input, Form } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { LOGIN } from "../../redux/Auth/auth.types";
+import Lottie from "react-lottie";
+import bg from "../../assets/login-background.json";
 
 import "./index.less";
 
@@ -33,8 +35,20 @@ const Login = (props) => {
     }
   }, [error, form]);
 
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: bg,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+
   return (
-    <Fragment>
+    <div className="login-container">
+      <div className="lottie-bg">
+        <Lottie options={defaultOptions} />
+      </div>
       <div className="form">
         <div className="logo">
           <img alt="logo" src="https://morethanblog.tk/asset/logo.png" />
@@ -58,7 +72,7 @@ const Login = (props) => {
           </Row>
         </Form>
       </div>
-    </Fragment>
+    </div>
   );
 };
 
