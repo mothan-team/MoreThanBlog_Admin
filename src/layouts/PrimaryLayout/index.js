@@ -3,9 +3,10 @@ import { Layout } from "antd";
 import Breadcrumb from "../../components/Breadcrumb";
 import SideMenu from "../../components/SideMenu";
 import { Link } from "react-router-dom";
+import Header from "../../components/Header";
 import "./index.less";
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Content, Footer, Sider } = Layout;
 
 const PrimaryLayout = (props) => {
   const [collapsed, setCollapsed] = useState(false);
