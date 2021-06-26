@@ -6,7 +6,6 @@ function* loginAsync({ payload }) {
   try {
     const { request, history } = payload;
     const { data } = yield call(callApi, "/user/login", "POST", request);
-    console.log(data);
     localStorage.setItem("token", data.accessToken);
     localStorage.setItem("userId", data.userId);
     yield put({ type: LOGIN_SUCCESS, payload: data });

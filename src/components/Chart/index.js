@@ -16,8 +16,7 @@ const Chart = () => {
 
   const config = {
     data,
-    width: 800,
-    height: 400,
+    height: 500,
     autoFit: false,
     xField: "year",
     yField: "value",

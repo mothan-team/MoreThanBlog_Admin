@@ -1,10 +1,12 @@
 import React, { Fragment, useEffect } from "react";
 import { Button, Row, Input, Form } from "antd";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { LOGIN } from "../../redux/Auth/auth.types";
+import Lottie from "react-lottie";
+import bg from "../../assets/login-background.json";
 
 import "./index.less";
-import { useHistory } from "react-router-dom";
 
 const FormItem = Form.Item;
 
@@ -13,7 +15,7 @@ const Login = (props) => {
   const loading = useSelector((state) => state.auth.loading);
   const error = useSelector((state) => state.auth.error);
   const dispatch = useDispatch();
-  let history = useHistory();
+  const history = useHistory();
 
   const handleOk = (values) => {
     dispatch({ type: LOGIN, payload: { request: values, history } });
@@ -33,8 +35,20 @@ const Login = (props) => {
     }
   }, [error, form]);
 
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: bg,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+
   return (
-    <Fragment>
+    <div className="login-container">
+      <div className="lottie-bg">
+        <Lottie options={defaultOptions} />
+      </div>
       <div className="form">
         <div className="logo">
           <img alt="logo" src="https://morethanblog.tk/asset/logo.png" />
@@ -58,7 +72,7 @@ const Login = (props) => {
           </Row>
         </Form>
       </div>
-    </Fragment>
+    </div>
   );
 };
 
