@@ -7,9 +7,13 @@ import { withLinks } from "./plugings/withLinks";
 import initialValue from "./initialValue";
 import { Toolbar } from "./components/Toolbar";
 import { HoveringToolbar } from "./components/HoveringToolbar";
+import { withKeyCommands } from "./plugings/withKeyCommands";
 
 const Editor = () => {
-  const editor = React.useMemo(() => withReact(withLinks(withImages(createEditor()))), []);
+  const editor = React.useMemo(
+    () => withReact(withKeyCommands(withLinks(withImages(createEditor())))),
+    []
+  );
   const [value, setValue] = React.useState(initialValue);
   const renderElementMemo = React.useCallback(renderElement, []);
 

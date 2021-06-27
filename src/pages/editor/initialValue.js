@@ -1,4 +1,4 @@
-export default [
+const initialValue = [
   {
     type: "H1",
     children: [
@@ -29,8 +29,10 @@ export default [
   },
   {
     type: "IMAGE",
-    url: "https://static.ghost.org/v4.0.0/images/brandsettings.png",
+    src: "https://static.ghost.org/v4.0.0/images/brandsettings.png",
     alt: "Brand Settings",
     children: [{ text: "" }],
   },
 ];
+
+export default initialValue;

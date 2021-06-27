@@ -21,7 +21,7 @@ export const serialize = node => {
     case LINK:
       return `<a href="${escapeHtml(node.to)}">${children}</a>`;
     case IMAGE:
-      return `<img src="${node.url}" alt="${node.alt}" />`;
+      return `<img src="${node.src}" alt="${node.alt}" />`;
     default:
       return children;
   }
