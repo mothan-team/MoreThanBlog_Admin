@@ -19,8 +19,7 @@ const Blogs = () => {
   }, [dispatch, history, page, size]);
 
   const onChange = (p, s) => {
-    history.replace(`/admin/blogs?page=${p}&size=${s}`);
-    dispatch({ type: GET_BLOGS, payload: { page: p, size: s } });
+    history.push(`/admin/blogs?page=${p}&size=${s}`);
     window.scroll({ top: 0, left: 0, behavior: "smooth" });
   };
 
