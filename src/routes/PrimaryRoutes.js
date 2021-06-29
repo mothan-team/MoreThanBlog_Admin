@@ -7,7 +7,6 @@ const Categories = lazy(() => import("../pages/categories"));
 const Users = lazy(() => import("../pages/users"));
 const Blogs = lazy(() => import("../pages/blogs"));
 const BlogDetail = lazy(() => import("../pages/blog-detail"));
-const CategoryDetail = lazy(() => import("../pages/category-detail"));
 
 const PrimaryRoutes = () => {
   let match = useRouteMatch();
@@ -18,7 +17,6 @@ const PrimaryRoutes = () => {
         <Switch>
           <Redirect exact from={`${match.url}/`} to={`${match.url}/dashboard`} />
           <Route path={`${match.url}/dashboard`} component={Dashboard} />
-          <Route path={`${match.url}/categories/:id`} component={CategoryDetail} />
           <Route path={`${match.url}/categories`} component={Categories} />
           <Route path={`${match.url}/blogs/:id`} component={BlogDetail} />
           <Route path={`${match.url}/blogs`} component={Blogs} />
