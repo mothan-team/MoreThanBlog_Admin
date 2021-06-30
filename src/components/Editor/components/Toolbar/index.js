@@ -5,9 +5,10 @@ import { Button } from "antd";
 import { FontSizeOutlined } from "@ant-design/icons";
 
 import { uploadImage, deleteCurrentImage } from "../../../../redux/Editor/editor.actions";
-import { toggleHeading, insertImage } from "../../utils";
+import { toggleHeading, insertImage, serialize } from "../../utils";
+import { deserialize } from "../../utils/deserialize";
 
-export const Toolbar = () => {
+export const Toolbar = ({ value }) => {
   const editor = useSlateStatic();
   const dispatch = useDispatch();
   const { currentImage } = useSelector(state => state.editor);
@@ -27,6 +28,13 @@ export const Toolbar = () => {
     }
   }, [currentImage, dispatch, editor]);
 
+  const handleExportHtml = () => {
+    const html = serialize({ children: value });
+    const document = new DOMParser().parseFromString(html, "text/html");
+    const json = deserialize(document.body);
+    console.log({ value, json });
+  };
+
   return (
     <>
       <Button onClick={() => toggleHeading(editor)}>
@@ -34,6 +42,8 @@ export const Toolbar = () => {
       </Button>
 
       <input type="file" accept="image/*" onChange={handleFileChosen} />
+
+      <button onClick={() => handleExportHtml(editor.value)}>Export HTML</button>
     </>
   );
 };

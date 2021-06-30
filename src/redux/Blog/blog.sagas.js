@@ -1,6 +1,9 @@
 import { put, takeEvery, all, call } from "redux-saga/effects";
 import { callAuthorizationApi } from "../../utils/request";
 import {
+  CREATE_BLOG,
+  CREATE_BLOG_FAIL,
+  CREATE_BLOG_SUCCESS,
   DELETE_BLOG,
   DELETE_BLOG_FAIL,
   DELETE_BLOG_SUCCESS,
@@ -30,9 +33,20 @@ function* deleteBlogAsync({ payload: id }) {
   }
 }
 
+function* createBlogAsync({ payload }) {
+  try {
+    const url = `/blogs`;
+    const { data } = yield call(callAuthorizationApi, url, "POST", payload);
+    yield put({ type: CREATE_BLOG_SUCCESS, payload: data });
+  } catch (error) {
+    yield put({ type: CREATE_BLOG_FAIL, payload: error });
+  }
+}
+
 export default function* blogSagas() {
   yield all([
     yield takeEvery(GET_BLOGS, getBlogsAsync),
     yield takeEvery(DELETE_BLOG, deleteBlogAsync),
+    yield takeEvery(CREATE_BLOG, createBlogAsync),
   ]);
 }

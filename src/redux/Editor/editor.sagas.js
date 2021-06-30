@@ -6,7 +6,10 @@ import { UPLOAD_IMAGE } from "./editor.types";
 function* uploadImageAsync({ payload }) {
   try {
     const url = `/files`;
-    const { data } = yield call(callAuthorizationApi, url, "POST", payload);
+    const { data } = yield call(callAuthorizationApi, url, "POST", payload, {
+      "Content-Type": "multipart/form-data",
+      "Access-Control-Allow-Origin": "*",
+    });
     yield put(uploadImageSuccess(data));
   } catch (error) {
     yield put(uploadImageFail(error));

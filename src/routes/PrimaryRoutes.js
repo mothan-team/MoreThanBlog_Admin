@@ -8,7 +8,6 @@ const Users = lazy(() => import("../pages/users"));
 const Blogs = lazy(() => import("../pages/blogs"));
 const BlogDetail = lazy(() => import("../pages/blog-detail"));
 const CategoryDetail = lazy(() => import("../pages/category-detail"));
-const Editor = lazy(() => import("../pages/editor"));
 
 const PrimaryRoutes = () => {
   let match = useRouteMatch();
@@ -24,7 +23,6 @@ const PrimaryRoutes = () => {
           <Route path={`${match.url}/blogs/:id`} component={BlogDetail} />
           <Route path={`${match.url}/blogs`} component={Blogs} />
           <Route path={`${match.url}/users`} component={Users} />
-          <Route path={`${match.url}/editor`} component={Editor} />
           <Redirect to="/error" />
         </Switch>
       </Suspense>

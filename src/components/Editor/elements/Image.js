@@ -1,5 +1,4 @@
 import { useFocused, useSelected } from "slate-react";
-import { Image } from "antd";
 
 export const ImageElement = props => {
   const selected = useSelected();
@@ -10,7 +9,12 @@ export const ImageElement = props => {
       style={{ border: selected && focused ? "#1890ff 4px solid" : undefined }}
     >
       <div contentEditable={false}>
-        <Image src={props.element.src} alt={props.element.alt} />
+        <img
+          src={props.element.src}
+          alt={props.element.alt}
+          style={{ maxWidth: "100%" }}
+          draggable={false}
+        />
       </div>
       {props.children}
     </div>
