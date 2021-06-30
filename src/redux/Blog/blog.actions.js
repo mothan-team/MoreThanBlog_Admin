@@ -5,46 +5,54 @@ import {
   DELETE_BLOG,
   DELETE_BLOG_SUCCESS,
   DELETE_BLOG_FAIL,
+  CREATE_BLOG,
 } from "./blog.types";
 
-export const getBlogs = (data) => {
+export const getBlogs = data => {
   return {
     type: GET_BLOGS,
     payload: data,
   };
 };
 
-export const getBlogsSuccess = (data) => {
+export const getBlogsSuccess = data => {
   return {
     type: GET_BLOGS_SUCCESS,
     payload: data,
   };
 };
 
-export const getBlogsFail = (err) => {
+export const getBlogsFail = err => {
   return {
     type: GET_BLOGS_FAIL,
     payload: err,
   };
 };
 
-export const deleteBlog = (data) => {
+export const deleteBlog = data => {
   return {
     type: DELETE_BLOG,
     payload: data,
   };
 };
 
-export const deleteBlogSuccess = (data) => {
+export const deleteBlogSuccess = data => {
   return {
     type: DELETE_BLOG_SUCCESS,
     payload: data,
   };
 };
 
-export const deleteBlogFail = (err) => {
+export const deleteBlogFail = err => {
   return {
     type: DELETE_BLOG_FAIL,
     payload: err,
+  };
+};
+
+export const createBlog = data => {
+  return {
+    type: CREATE_BLOG,
+    payload: data,
   };
 };

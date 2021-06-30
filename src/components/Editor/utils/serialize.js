@@ -8,6 +8,12 @@ export const serialize = node => {
     if (node.bold) {
       string = `<strong>${string}</strong>`;
     }
+    if (node.italic) {
+      string = `<i>${string}</i>`;
+    }
+    if (node.underline) {
+      string = `<u>${string}</u>`;
+    }
     return string;
   }
 
@@ -19,7 +25,7 @@ export const serialize = node => {
     case H1:
       return `<h1>${children}</h1>`;
     case LINK:
-      return `<a href="${escapeHtml(node.to)}">${children}</a>`;
+      return `<a href="${escapeHtml(node.href)}">${children}</a>`;
     case IMAGE:
       return `<img src="${node.src}" alt="${node.alt}" />`;
     default:

@@ -1,7 +1,7 @@
-import React from "react";
+import { Editor } from "../../components/Editor";
 
 const BlogDetail = () => {
-  return <div>blog detail</div>;
+  return <Editor />;
 };
 
 export default BlogDetail;

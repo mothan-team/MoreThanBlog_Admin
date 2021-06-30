@@ -1,4 +1,7 @@
 import {
+  CREATE_BLOG,
+  CREATE_BLOG_FAIL,
+  CREATE_BLOG_SUCCESS,
   DELETE_BLOG,
   DELETE_BLOG_FAIL,
   DELETE_BLOG_SUCCESS,
@@ -9,6 +12,7 @@ import {
 
 const INITIAL_STATE = {
   blogs: [],
+  currentBlogId: null,
   page: 1,
   size: 10,
   total: 0,
@@ -44,7 +48,7 @@ const blogReducer = (state = INITIAL_STATE, { type, payload }) => {
     case DELETE_BLOG:
       return {
         ...state,
-        blogs: state.blogs.filter((x) => x.id !== payload),
+        blogs: state.blogs.filter(x => x.id !== payload),
         loading: true,
       };
 
@@ -60,6 +64,27 @@ const blogReducer = (state = INITIAL_STATE, { type, payload }) => {
         loading: false,
         error: payload.message,
       };
+
+    case CREATE_BLOG:
+      return {
+        ...state,
+        loading: true,
+      };
+
+    case CREATE_BLOG_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        currentBlogId: payload,
+      };
+
+    case CREATE_BLOG_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: payload.message,
+      };
+
     default:
       return state;
   }
