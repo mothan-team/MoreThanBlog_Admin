@@ -5,8 +5,8 @@ import { DELETE_BLOG, GET_BLOGS } from "../../redux/Blog/blog.types";
 import { Link, useHistory } from "react-router-dom";
 import { parse } from "query-string";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
-import "./index.less";
 import { cutTail } from "../../utils/stringHelper";
+import "./index.less";
 
 const Blogs = () => {
   const dispatch = useDispatch();
@@ -19,8 +19,7 @@ const Blogs = () => {
   }, [dispatch, history, page, size]);
 
   const onChange = (p, s) => {
-    history.replace(`/admin/blogs?page=${p}&size=${s}`);
-    dispatch({ type: GET_BLOGS, payload: { page: p, size: s } });
+    history.push(`/admin/blogs?page=${p}&size=${s}`);
     window.scroll({ top: 0, left: 0, behavior: "smooth" });
   };
 

@@ -5,8 +5,8 @@ axios.defaults.baseURL = "https://api.morethanblog.tk";
 axios.defaults.headers.common.Accept = "application/json";
 
 axios.interceptors.response.use(
-  (response) => checkStatus(response),
-  (error) => Promise.reject(checkStatus(error.response))
+  response => checkStatus(response),
+  error => Promise.reject(checkStatus(error.response))
 );
 
 export const callApi = (
@@ -18,7 +18,7 @@ export const callApi = (
   return axios({
     method,
     url: `${endpoint}`,
-    headers: { ...headers, Accept: "application/json" },
+    headers: { ...headers },
     data: body,
   });
 };
