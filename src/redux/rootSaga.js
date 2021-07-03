@@ -2,6 +2,7 @@ import { all } from "redux-saga/effects";
 import loginSagas from "./Auth/auth.sagas";
 import blogSagas from "./Blog/blog.sagas";
 import counterSagas from "./Counter/counter.sagas";
+import categorySagas from "./Category/category.sagas";
 import editorSagas from "./Editor/editor.sagas";
 
 export default function* rootSaga() {
@@ -9,6 +10,7 @@ export default function* rootSaga() {
     counterSagas(),
     loginSagas(),
     blogSagas(),
+    categorySagas(),
     editorSagas(),
     // anotherSagas(),
   ]);
