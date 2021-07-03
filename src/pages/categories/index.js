@@ -29,8 +29,6 @@ const Categories = () => {
   const { total, categories, loading } = useSelector((state) => state.category);
 
   useEffect(() => {
-    // console.log("term ", terms);
-    // console.log("page ", page);
     dispatch({
       type: GET_CATEGORIES,
       payload: { page: page || 1, size: size || 10, terms: searchTerm || "" },
