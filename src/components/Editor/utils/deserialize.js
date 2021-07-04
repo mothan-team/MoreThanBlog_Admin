@@ -2,6 +2,14 @@ import { jsx } from "slate-hyperscript";
 import { H1, IMAGE, LINK, PARAGRAPH } from "../elements/types";
 
 export const deserialize = element => {
+  if (!element)
+    return [
+      {
+        type: PARAGRAPH,
+        children: [{ text: "" }],
+      },
+    ];
+
   if (element.nodeType === 3) {
     return element.textContent;
   } else if (element.nodeType !== 1) {

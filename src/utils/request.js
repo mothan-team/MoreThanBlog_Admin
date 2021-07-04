@@ -1,11 +1,20 @@
 /* eslint-disable no-restricted-globals */
 import axios from "axios";
+import nProgress from "nprogress";
 
 axios.defaults.baseURL = "https://api.morethanblog.tk";
 axios.defaults.headers.common.Accept = "application/json";
 
+axios.interceptors.request.use(config => {
+  nProgress.start();
+  return config;
+});
+
 axios.interceptors.response.use(
-  response => checkStatus(response),
+  response => {
+    nProgress.done();
+    return checkStatus(response);
+  },
   error => Promise.reject(checkStatus(error.response))
 );
 
@@ -45,6 +54,17 @@ function checkStatus(response) {
     window.location.reload();
   }
   return response.data;
+}
+
+export function uploadImage(file) {
+  const formData = new FormData();
+  formData.append("File", file);
+  formData.append("Folder", "cover");
+
+  return callAuthorizationApi("/files", "POST", formData, {
+    "Content-Type": "multipart/form-data",
+    "Access-Control-Allow-Origin": "*",
+  });
 }
 
 function logout() {

@@ -21,13 +21,13 @@ export const serialize = node => {
 
   switch (node.type) {
     case PARAGRAPH:
-      return `<p>${children}</p>`;
+      return `<p class='blog_paragraph'>${children}</p>`;
     case H1:
-      return `<h1>${children}</h1>`;
+      return `<h1 class='blog_heading'>${children}</h1>`;
     case LINK:
-      return `<a href="${escapeHtml(node.href)}">${children}</a>`;
+      return `<a class='blog_link' href="${escapeHtml(node.href)}">${children}</a>`;
     case IMAGE:
-      return `<img src="${node.src}" alt="${node.alt}" />`;
+      return `<img class='blog_image' src="${node.src}" alt="${node.alt}" />`;
     default:
       return children;
   }
