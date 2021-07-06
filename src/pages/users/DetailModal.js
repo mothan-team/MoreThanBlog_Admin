@@ -9,7 +9,6 @@ const DetailModal = (props) => {
 
     useEffect(() => {
         setUserDetail(user);
-        console.log(userDetail);
     }, [user]);
 
     useEffect(() => {
