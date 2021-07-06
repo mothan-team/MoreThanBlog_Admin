@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Table, Space, Modal, Input, Spin } from "antd";
+import { Table, Space, Modal, Input, Spin, Button } from "antd";
 import { EditOutlined, EyeOutlined, DeleteOutlined } from "@ant-design/icons";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import DetailModal from "./DetailModal";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -9,6 +9,7 @@ import {
   GET_CATEGORIES,
   UPDATE_CATEGORY,
   GET_CATEGORY,
+  CREATE_CATEGORY
 } from "../../redux/Category/category.types";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { parse } from "query-string";
@@ -20,7 +21,7 @@ const Categories = () => {
   let history = useHistory();
   const { page, size, terms } = parse(history.location.search);
   const [isDetailModalVisible, setIsDetailModalVisible] = useState(null);
-  const [isEdit, setIsEdit] = useState(false);
+  const [type, setType] = useState("View");
   const [searchTerm, setSearchTerm] = useState(terms || "");
 
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
@@ -55,7 +56,6 @@ const Categories = () => {
       title: "Name",
       dataIndex: "name",
       key: "name",
-      render: (text) => <a href="/">{text}</a>,
     },
     {
       title: "Desc",
@@ -73,22 +73,27 @@ const Categories = () => {
       key: "action",
       render: (text, record) => (
         <Space size="middle">
-          <Link to="" onClick={(e) => handleShowDetailModalButton(e, record.id)}>
+          <Button type="link" onClick={(e) => handleShowDetailModalButton(e, record.id)}>
             <EyeOutlined />
-          </Link>
-          <Link to="" onClick={(e) => handleShowEditModalButton(e, record.id)}>
+          </Button>
+          <Button type="link" onClick={(e) => handleShowEditModalButton(e, record.id)}>
             <EditOutlined />
-          </Link>
-          <Link to="" onClick={() => showDeleteConfirm(record.id)}>
+          </Button>
+          <Button type="link" onClick={() => showDeleteConfirm(record.id)}>
             <DeleteOutlined />
-          </Link>
+          </Button>
         </Space>
       ),
     },
   ];
 
   const handleModalOkButton = (id, category) => {
-    dispatch({ type: UPDATE_CATEGORY, payload: { id, category } });
+    if (id) {
+      dispatch({ type: UPDATE_CATEGORY, payload: { id, category } });
+    }
+    else {
+      dispatch({ type: CREATE_CATEGORY, payload: { category } });
+    }
     setIsDetailModalVisible(false);
   };
 
@@ -98,14 +103,20 @@ const Categories = () => {
 
   const handleShowDetailModalButton = (e, id) => {
     e.preventDefault();
-    setIsEdit(false);
+    setType("View");
     dispatch({ type: GET_CATEGORY, payload: id });
+    setIsDetailModalVisible(true);
+  };
+
+  const handleShowCreateModalButton = (e, id) => {
+    e.preventDefault();
+    setType("Add");
     setIsDetailModalVisible(true);
   };
 
   const handleShowEditModalButton = (e, id) => {
     e.preventDefault();
-    setIsEdit(true);
+    setType("Edit");
     dispatch({ type: GET_CATEGORY, payload: id });
     setIsDetailModalVisible(true);
   };
@@ -136,6 +147,9 @@ const Categories = () => {
         bordered={false}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
+      <Button type="primary" onClick={handleShowCreateModalButton} style={{ float: "right" }}>
+        New Category
+      </Button>
       <Spin spinning={loading}>
         <Table
           columns={columns}
@@ -147,7 +161,7 @@ const Categories = () => {
       </Spin>
       <DetailModal
         isModalVisible={isDetailModalVisible}
-        isEdit={isEdit}
+        type={type}
         handleOk={handleModalOkButton}
         handleCancel={handleModalCancelButton}
       />

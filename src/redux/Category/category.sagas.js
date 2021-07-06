@@ -13,6 +13,9 @@ import {
     UPDATE_CATEGORY,
     UPDATE_CATEGORY_SUCCESS,
     UPDATE_CATEGORY_FAIL,
+    CREATE_CATEGORY,
+    CREATE_CATEGORY_SUCCESS,
+    CREATE_CATEGORY_FAIL
 } from "./category.types";
 
 function* getCategoriesAsync({ payload }) {
@@ -59,11 +62,25 @@ function* deleteCategoryAsync({ payload: id }) {
     }
 }
 
+function* addCategoryAsync({ payload }) {
+    try {
+        const { category } = payload;
+        const url = `/categories`;
+        const state = yield select();
+        yield call(callAuthorizationApi, url, "POST", category);
+        yield put({ type: GET_CATEGORIES, payload: { page: state?.category?.page || 1, size: state?.category?.size || 10, terms: '' } });
+        yield put({ type: CREATE_CATEGORY_SUCCESS });
+    } catch (error) {
+        yield put({ type: CREATE_CATEGORY_FAIL, payload: error });
+    }
+}
+
 export default function* categorySagas() {
     yield all([
         yield takeEvery(GET_CATEGORIES, getCategoriesAsync),
         yield takeEvery(GET_CATEGORY, getCategoryAsync),
         yield takeEvery(DELETE_CATEGORY, deleteCategoryAsync),
         yield takeEvery(UPDATE_CATEGORY, updateCategoryAsync),
+        yield takeEvery(CREATE_CATEGORY, addCategoryAsync),
     ]);
 }

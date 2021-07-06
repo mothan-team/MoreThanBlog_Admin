@@ -10,7 +10,10 @@ import {
     DELETE_CATEGORY_FAIL,
     UPDATE_CATEGORY,
     UPDATE_CATEGORY_SUCCESS,
-    UPDATE_CATEGORY_FAIL
+    UPDATE_CATEGORY_FAIL,
+    CREATE_CATEGORY,
+    CREATE_CATEGORY_SUCCESS,
+    CREATE_CATEGORY_FAIL
 } from "./category.types";
 
 export const getCategories = (data) => {
@@ -93,6 +96,27 @@ export const updateCategorySuccess = (data) => {
 export const updateCategoryFail = (err) => {
     return {
         type: UPDATE_CATEGORY_FAIL,
+        payload: err,
+    };
+};
+
+export const addCategory = (data) => {
+    return {
+        type: CREATE_CATEGORY,
+        payload: data,
+    };
+};
+
+export const addCategorySuccess = (data) => {
+    return {
+        type: CREATE_CATEGORY_SUCCESS,
+        payload: data,
+    };
+};
+
+export const addCategoryFail = (err) => {
+    return {
+        type: CREATE_CATEGORY_FAIL,
         payload: err,
     };
 };
