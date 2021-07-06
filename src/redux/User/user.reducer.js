@@ -1,35 +1,35 @@
 import {
-    GET_CATEGORIES,
-    GET_CATEGORIES_SUCCESS,
-    GET_CATEGORIES_FAIL,
-    GET_CATEGORY,
-    GET_CATEGORY_SUCCESS,
-    GET_CATEGORY_FAIL,
-    DELETE_CATEGORY,
-    DELETE_CATEGORY_SUCCESS,
-    DELETE_CATEGORY_FAIL,
-    UPDATE_CATEGORY,
-    UPDATE_CATEGORY_SUCCESS,
-    UPDATE_CATEGORY_FAIL,
-    CREATE_CATEGORY,
-    CREATE_CATEGORY_SUCCESS,
-    CREATE_CATEGORY_FAIL
-} from "./category.types";
+    GET_USERS,
+    GET_USERS_SUCCESS,
+    GET_USERS_FAIL,
+    GET_USER,
+    GET_USER_SUCCESS,
+    GET_USER_FAIL,
+    DELETE_USER,
+    DELETE_USER_SUCCESS,
+    DELETE_USER_FAIL,
+    UPDATE_USER,
+    UPDATE_USER_SUCCESS,
+    UPDATE_USER_FAIL,
+    CREATE_USER,
+    CREATE_USER_SUCCESS,
+    CREATE_USER_FAIL
+} from "./user.types";
 
 const INITIAL_STATE = {
-    categories: [],
+    users: [],
     page: 1,
     size: 10,
     terms: null,
     total: 0,
     loading: false,
     error: null,
-    category: null
+    user: null
 };
 
-const categoryReducer = (state = INITIAL_STATE, { type, payload }) => {
+const userReducer = (state = INITIAL_STATE, { type, payload }) => {
     switch (type) {
-        case GET_CATEGORIES:
+        case GET_USERS:
             return {
                 ...state,
                 loading: true,
@@ -38,90 +38,90 @@ const categoryReducer = (state = INITIAL_STATE, { type, payload }) => {
                 terms: payload.terms
             };
 
-        case GET_CATEGORIES_SUCCESS:
+        case GET_USERS_SUCCESS:
             return {
                 ...state,
-                categories: payload.items,
+                users: payload.items,
                 total: payload.total,
                 loading: false,
             };
 
-        case GET_CATEGORIES_FAIL:
+        case GET_USERS_FAIL:
             return {
                 ...state,
                 loading: false,
                 error: payload.message,
             };
 
-        case DELETE_CATEGORY:
+        case DELETE_USER:
             return {
                 ...state,
-                categories: state.categories.filter((x) => x.id !== payload),
+                users: state.users.filter((x) => x.id !== payload),
                 loading: true,
             };
 
-        case DELETE_CATEGORY_SUCCESS:
+        case DELETE_USER_SUCCESS:
             return {
                 ...state,
                 loading: false,
             };
 
-        case DELETE_CATEGORY_FAIL:
+        case DELETE_USER_FAIL:
             return {
                 ...state,
                 loading: false,
                 error: payload.message,
             };
-        case GET_CATEGORY:
+        case GET_USER:
             return {
                 ...state,
                 loading: true,
             };
 
-        case GET_CATEGORY_SUCCESS:
+        case GET_USER_SUCCESS:
             return {
                 ...state,
-                category: payload,
+                user: payload,
                 loading: false,
             };
 
-        case GET_CATEGORY_FAIL:
+        case GET_USER_FAIL:
             return {
                 ...state,
                 loading: false,
                 error: payload.message,
             };
-        case UPDATE_CATEGORY:
+        case UPDATE_USER:
             return {
                 ...state,
                 loading: true,
             };
 
-        case UPDATE_CATEGORY_SUCCESS:
+        case UPDATE_USER_SUCCESS:
             return {
                 ...state,
                 loading: false,
             };
 
-        case UPDATE_CATEGORY_FAIL:
+        case UPDATE_USER_FAIL:
             return {
                 ...state,
                 loading: false,
                 error: payload.message,
             };
-        case CREATE_CATEGORY:
+        case CREATE_USER:
             return {
                 ...state,
                 loading: true,
             };
 
-        case CREATE_CATEGORY_SUCCESS:
+        case CREATE_USER_SUCCESS:
             return {
                 ...state,
                 loading: false,
             };
 
-        case CREATE_CATEGORY_FAIL:
+        case CREATE_USER_FAIL:
             return {
                 ...state,
                 loading: false,
@@ -132,4 +132,4 @@ const categoryReducer = (state = INITIAL_STATE, { type, payload }) => {
     }
 };
 
-export default categoryReducer;
+export default userReducer;

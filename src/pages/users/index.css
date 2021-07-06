@@ -1,0 +1,9 @@
+.users-search{
+    margin-bottom: 20px;
+    border-bottom: 1px solid #f0f0f0;
+    width: 20%;
+}
+
+.users-search:hover{
+    border-bottom: 1px solid #f0f0f0;
+}

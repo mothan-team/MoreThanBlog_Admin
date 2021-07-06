@@ -4,21 +4,22 @@ import { getTimeFormat } from '../../utils/dateTimeHelper';
 import { useSelector } from "react-redux";
 
 const DetailModal = (props) => {
-    const { category } = useSelector((state) => state.category);
-    const [categoryDetail, setCategoryDetail] = useState(null);
+    const { user } = useSelector((state) => state.user);
+    const [userDetail, setUserDetail] = useState(null);
 
     useEffect(() => {
-        setCategoryDetail(category);
-    }, [category]);
+        setUserDetail(user);
+        console.log(userDetail);
+    }, [user]);
 
     useEffect(() => {
         if (props.type === "Add") {
-            setCategoryDetail(null);
+            setUserDetail(null);
         }
     }, [props.type]);
 
     const handleOk = () => {
-        props.handleOk(categoryDetail.id, categoryDetail);
+        props.handleOk(userDetail.id, userDetail);
     };
 
     const handleCancel = () => {
@@ -27,7 +28,7 @@ const DetailModal = (props) => {
 
     return (
         <Modal
-            title={props.type === "View" ? "View Category" : props.type === "Add" ? "Add Category" : "Edit Category"}
+            title={props.type === "View" ? "View User" : props.type === "Add" ? "Add User" : "Edit User"}
             visible={props.isModalVisible}
             onCancel={handleCancel}
             footer={props.type === "View"
@@ -49,40 +50,47 @@ const DetailModal = (props) => {
                 }}
                 size="large"
             >
-                <Form.Item label="Name">
+                <Form.Item label="First Name">
                     <Input
-                        value={categoryDetail?.name}
+                        value={userDetail?.firstName}
                         hidden={props.type === "View" ? true : false}
-                        name="name"
-                        rules={[{ required: true, message: "Please input the name of category!" }]}
-                        onChange={(ev) => setCategoryDetail({ ...categoryDetail, name: ev.target.value })}
+                        name="firstName"
+                        onChange={(ev) => setUserDetail({ ...userDetail, firstName: ev.target.value })}
                     />
-                    <label hidden={props.type === "View" ? false : true}>{categoryDetail?.name}</label>
+                    <label hidden={props.type === "View" ? false : true}>{userDetail?.firstName}</label>
                 </Form.Item>
-                <Form.Item label="Desc">
+                <Form.Item label="Last Name">
                     <Input
-                        value={categoryDetail?.desc}
+                        value={userDetail?.lastName}
                         hidden={props.type === "View" ? true : false}
-                        name="desc"
-                        rules={[{ required: true, message: "Please input the description of category!" }]}
-                        onChange={(ev) => setCategoryDetail({ ...categoryDetail, desc: ev.target.value })}
+                        name="lastName"
+                        onChange={(ev) => setUserDetail({ ...userDetail, lastName: ev.target.value })}
                     />
-                    <label hidden={props.type === "View" ? false : true}>{categoryDetail?.desc}</label>
+                    <label hidden={props.type === "View" ? false : true}>{userDetail?.lastName}</label>
+                </Form.Item>
+                <Form.Item label="Email">
+                    <Input
+                        value={userDetail?.email}
+                        hidden={props.type === "View" ? true : false}
+                        name="email"
+                        onChange={(ev) => setUserDetail({ ...userDetail, email: ev.target.value })}
+                    />
+                    <label hidden={props.type === "View" ? false : true}>{userDetail?.email}</label>
                 </Form.Item>
                 <Form.Item label="Created By" hidden={props.type === "View" ? false : true} name="createdBy">
-                    <label >{categoryDetail?.createdBy}</label>
+                    <label >{userDetail?.createdBy}</label>
                 </Form.Item>
                 <Form.Item label="Created Time" hidden={props.type === "View" ? false : true} name="createdTime">
-                    <label >{getTimeFormat(categoryDetail?.createdTime)}</label>
+                    <label >{getTimeFormat(userDetail?.createdTime)}</label>
                 </Form.Item>
                 <Form.Item label="Last Update Time" hidden={props.type === "View" ? false : true} name="lastUpdatedTime">
-                    <label >{getTimeFormat(categoryDetail?.lastUpdatedTime)}</label>
+                    <label >{getTimeFormat(userDetail?.lastUpdatedTime)}</label>
                 </Form.Item>
                 <Form.Item label="Status">
                     <Switch
-                        checked={categoryDetail?.isActive}
+                        checked={userDetail?.isActive}
                         disabled={props.type === "View" ? true : false}
-                        onChange={(ev) => setCategoryDetail({ ...categoryDetail, isActive: !categoryDetail?.isActive })}
+                        onChange={(ev) => setUserDetail({ ...userDetail, isActive: !userDetail?.isActive })}
                     />
                 </Form.Item>
             </Form>
