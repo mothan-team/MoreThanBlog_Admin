@@ -24,6 +24,7 @@
     "react-router-breadcrumbs-hoc": "^4.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-verification-code-input": "^1.2.9",
     "redux": "^4.1.0",
     "redux-devtools-extension": "^2.13.9",
     "redux-saga": "^1.1.3",

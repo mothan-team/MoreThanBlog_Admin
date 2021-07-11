@@ -1,0 +1,11 @@
+export const SET_PASS = "SET_PASS";
+export const SET_PASS_SUCCESS = "SET_PASS_SUCCESS";
+export const SET_PASS_FAIL = "SET_PASS_FAIL";
+export const UPDATE_STEP = "UPDATE_STEP";
+export const GENERATE_OTP = "GENERATE_OTP";
+export const GENERATE_OTP_SUCCESS = "GENERATE_OTP_SUCCESS";
+export const GENERATE_OTP_FAIL = "GENERATE_OTP_FAIL";
+export const VERIFY_OTP = "VERIFY_OTP";
+export const VERIFY_OTP_SUCCESS = "VERIFY_OTP_SUCCESS";
+export const VERIFY_OTP_FAIL = "VERIFY_OTP_FAIL";
+export const RESET_STATE = "RESET_STATE";
