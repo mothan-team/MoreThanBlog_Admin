@@ -1,18 +1,20 @@
 import * as React from "react";
 import { createEditor } from "slate";
 import { Slate, Editable, withReact } from "slate-react";
-import { renderElement, renderLeaf } from "./utils";
+import { renderElement, renderLeaf, serialize } from "./utils";
 import { withImages } from "./plugings/withImages";
 import { withLinks } from "./plugings/withLinks";
 import { Toolbar } from "./components/Toolbar";
 import { HoveringToolbar } from "./components/HoveringToolbar";
 import { withKeyCommands } from "./plugings/withKeyCommands";
-import intialValue from "./initialValue";
 import { withLayout } from "./plugings/withLayout";
 import { withHistory } from "slate-history";
+import { deserialize } from "./utils/deserialize";
+import equal from "fast-deep-equal";
 
-const Editor = () => {
-  const [value, setValue] = React.useState(intialValue);
+const Editor = ({ value, onUpdateBlogContent }) => {
+  const document = new DOMParser().parseFromString(value ?? "", "text/html");
+  const editorValue = deserialize(document.body);
   const renderElementMemo = React.useCallback(renderElement, []);
 
   const editor = React.useMemo(
@@ -24,14 +26,16 @@ const Editor = () => {
   return (
     <Slate
       editor={editor}
-      value={value}
+      value={editorValue}
       onChange={newValue => {
-        setValue(newValue);
+        // Prevent calling callback when unnecessary
+        if (equal(newValue, editorValue)) return;
+        const html = serialize({ children: newValue });
+        onUpdateBlogContent(html);
       }}
     >
       <HoveringToolbar />
-      <Toolbar value={value} />
-
+      <Toolbar />
       <Editable renderElement={renderElementMemo} renderLeaf={renderLeaf} />
     </Slate>
   );

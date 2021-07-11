@@ -10,3 +10,8 @@ export const toggleHeading = editor => {
     { match: node => Editor.isBlock(editor, node) }
   );
 };
+
+export const isHeadingActive = editor => {
+  const [match] = Editor.nodes(editor, { match: node => node.type === H1 });
+  return !!match;
+};

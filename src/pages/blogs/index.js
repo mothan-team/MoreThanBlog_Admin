@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table, Space, Spin, Button, Modal, Tag, Input, Form } from "antd";
+import { Table, Space, Spin, Button, Modal, Tag } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { DELETE_BLOG, GET_BLOGS } from "../../redux/Blog/blog.types";
 import { Link, useHistory } from "react-router-dom";
@@ -8,6 +8,7 @@ import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { cutTail } from "../../utils/stringHelper";
 import "./index.less";
 import { createBlog } from "../../redux/Blog/blog.actions";
+import { NewBlogModal } from "./NewBlogModal";
 
 const Blogs = () => {
   const dispatch = useDispatch();
@@ -132,49 +133,6 @@ const Blogs = () => {
         onSubmit={onCreateBlog}
       />
     </>
-  );
-};
-
-const NewBlogModal = ({ visible, onCancel, onSubmit }) => {
-  const [form] = Form.useForm();
-  return (
-    <Modal
-      visible={visible}
-      onCancel={onCancel}
-      onOk={() => {
-        form
-          .validateFields()
-          .then(values => {
-            form.resetFields();
-            onSubmit(values);
-          })
-          .catch(info => {
-            console.log("Validate Failed:", info);
-          });
-      }}
-    >
-      <Form
-        form={form}
-        layout="vertical"
-        name="form_in_modal"
-        initialValues={{ modifier: "public" }}
-      >
-        <Form.Item
-          name="title"
-          label="Title"
-          rules={[{ required: true, message: "Please input the title of blog!" }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          name="desc"
-          label="Description"
-          rules={[{ required: true, message: "Please input the description of blog!" }]}
-        >
-          <Input.TextArea />
-        </Form.Item>
-      </Form>
-    </Modal>
   );
 };
 
