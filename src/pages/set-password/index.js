@@ -23,12 +23,17 @@ const SetPassword = () => {
 
     useEffect(() => {
         if (isSucess) {
-            showSuccessPopup();
+            Modal.success({
+                content: "Set password success!",
+                onOk() {
+                    history.push("/authenticate/login");
+                }
+            });
         }
         return (() => {
             dispatch({ type: RESET_STATE });
         })
-    }, [isSucess]);
+    }, [isSucess, history, dispatch]);
 
     useEffect(() => {
         if (error) {
@@ -38,15 +43,6 @@ const SetPassword = () => {
             });
         }
     }, [error]);
-
-    const showSuccessPopup = () => {
-        Modal.success({
-            content: "Set password success!",
-            onOk() {
-                history.push("/authenticate/login");
-            }
-        });
-    };
 
     const defaultOptions = {
         loop: true,

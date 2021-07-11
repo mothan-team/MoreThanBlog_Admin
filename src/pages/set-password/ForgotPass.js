@@ -28,12 +28,17 @@ const ForgotPass = () => {
 
     useEffect(() => {
         if (isSucess) {
-            showSuccessPopup();
+            Modal.success({
+                content: "Reset password success!",
+                onOk() {
+                    history.push("/authenticate/login");
+                }
+            });
         }
         return (() => {
             dispatch({ type: RESET_STATE });
         })
-    }, [isSucess]);
+    }, [dispatch, isSucess, history]);
 
     useEffect(() => {
         if (error) {
@@ -43,15 +48,6 @@ const ForgotPass = () => {
             });
         }
     }, [error]);
-
-    const showSuccessPopup = () => {
-        Modal.success({
-            content: "Reset password success!",
-            onOk() {
-                history.push("/authenticate/login");
-            }
-        });
-    };
 
     const defaultOptions = {
         loop: true,
