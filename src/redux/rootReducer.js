@@ -12,8 +12,7 @@ const rootReducer = combineReducers({
   blog: blogReducer,
   category: categoryReducer,
   user: userReducer,
-  password: passwordReducer,
-  user: userReducer
+  password: passwordReducer
 });
 
 export default rootReducer;
