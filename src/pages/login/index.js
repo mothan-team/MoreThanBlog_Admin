@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Button, Row, Input, Form } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { LOGIN } from "../../redux/Auth/auth.types";
 import Lottie from "react-lottie";
 import bg from "../../assets/login-background.json";
@@ -52,8 +52,9 @@ const Login = (props) => {
       <div className="form">
         <div className="logo">
           <img alt="logo" src="https://morethanblog.tk/asset/logo.png" />
-          <span>Mỏ than</span>
         </div>
+        <div className="title">More Than Blog Portal</div>
+        <div className="desc">Please sign in with your More Than Blog admin credentials.</div>
         <Form onFinish={handleOk} form={form}>
           <FormItem name="email" rules={[{ required: true }]} hasFeedback>
             <Input placeholder="Email" />
@@ -65,10 +66,11 @@ const Login = (props) => {
             <Button type="primary" htmlType="submit" loading={loading}>
               Sign in
             </Button>
-            <p>
+            <p style={{ marginTop: 10 }}>
               <span style={{ marginRight: 20 }}>Username morethan.team@yopmail.com</span>
               <span>Password : abcd@1234</span>
             </p>
+            <Link className="forgot-pass" to="/forgot-pass">Forgot password</Link>
           </Row>
         </Form>
       </div>

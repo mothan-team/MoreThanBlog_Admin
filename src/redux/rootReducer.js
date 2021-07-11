@@ -5,6 +5,7 @@ import counterReducer from "./Counter/counter.reducer";
 import categoryReducer from "./Category/category.reducer";
 import editorReducer from "./Editor/editor.reducer";
 import userReducer from "./User/user.reducer";
+import passwordReducer from "./Password/password.reducer";
 
 const rootReducer = combineReducers({
   counter: counterReducer,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   blog: blogReducer,
   category: categoryReducer,
   editor: editorReducer,
-  user: userReducer
+  user: userReducer,
+  password: passwordReducer,
 });
 
 export default rootReducer;

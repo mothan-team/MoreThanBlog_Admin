@@ -5,6 +5,7 @@ import counterSagas from "./Counter/counter.sagas";
 import categorySagas from "./Category/category.sagas";
 import editorSagas from "./Editor/editor.sagas";
 import userSagas from "./User/user.sagas";
+import passwordSagas from "./Password/password.sagas";
 
 export default function* rootSaga() {
   yield all([
@@ -13,7 +14,8 @@ export default function* rootSaga() {
     blogSagas(),
     categorySagas(),
     editorSagas(),
-    userSagas()
+    userSagas(),
+    passwordSagas(),
     // anotherSagas(),
   ]);
 }

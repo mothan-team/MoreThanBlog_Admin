@@ -55,6 +55,7 @@ const DetailModal = (props) => {
                         hidden={props.type === "View" ? true : false}
                         name="firstName"
                         onChange={(ev) => setUserDetail({ ...userDetail, firstName: ev.target.value })}
+                        required
                     />
                     <label hidden={props.type === "View" ? false : true}>{userDetail?.firstName}</label>
                 </Form.Item>
@@ -64,6 +65,7 @@ const DetailModal = (props) => {
                         hidden={props.type === "View" ? true : false}
                         name="lastName"
                         onChange={(ev) => setUserDetail({ ...userDetail, lastName: ev.target.value })}
+                        required
                     />
                     <label hidden={props.type === "View" ? false : true}>{userDetail?.lastName}</label>
                 </Form.Item>
@@ -73,6 +75,7 @@ const DetailModal = (props) => {
                         hidden={props.type === "View" ? true : false}
                         name="email"
                         onChange={(ev) => setUserDetail({ ...userDetail, email: ev.target.value })}
+                        required
                     />
                     <label hidden={props.type === "View" ? false : true}>{userDetail?.email}</label>
                 </Form.Item>
